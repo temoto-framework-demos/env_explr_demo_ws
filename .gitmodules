@@ -1,27 +1,9 @@
 [submodule "src/realsense-ros"]
 	path = src/realsense-ros
 	url = https://github.com/IntelRealSense/realsense-ros
-[submodule "src/temoto/temoto"]
-	path = src/temoto/temoto
-	url = https://github.com/temoto-telerobotics/temoto
-[submodule "src/temoto/temoto_component_manager"]
-	path = src/temoto/temoto_component_manager
-	url = https://github.com/temoto-telerobotics/temoto_component_manager
-[submodule "src/temoto/temoto_action_assistant"]
-	path = src/temoto/temoto_action_assistant
-	url = https://github.com/temoto-telerobotics/temoto_action_assistant
-[submodule "src/temoto/temoto_action_engine"]
-	path = src/temoto/temoto_action_engine
-	url = https://github.com/temoto-telerobotics/temoto_action_engine
-[submodule "src/temoto/temoto_core"]
-	path = src/temoto/temoto_core
-	url = https://github.com/temoto-telerobotics/temoto_core
-[submodule "src/temoto/temoto_er_manager"]
-	path = src/temoto/temoto_er_manager
-	url = https://github.com/temoto-telerobotics/temoto_er_manager
-[submodule "src/temoto/file_template_parser"]
-	path = src/temoto/file_template_parser
-	url = https://github.com/ut-ims-robotics/file_template_parser
 [submodule "src/perception_tools/perception_pcl"]
 	path = src/perception_tools/perception_pcl
 	url = https://github.com/ros-perception/perception_pcl
+[submodule "src/temoto"]
+	path = src/temoto
+	url = https://github.com/temoto-telerobotics/temoto
