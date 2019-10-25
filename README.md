@@ -29,6 +29,13 @@ $ sudo apt install ros-melodic-rtabmap-ros
 $ sudo apt install ros-kinetic-imu-filter-madgwick
 ```
 
+**pointcloud_to_laserscan**
+``` bash
+$ sudo apt install ros-melodic-pointcloud-to-laserscan
+$ sudo apt install ros-melodic-octomap
+$ sudo apt install ros-melodic-octomap-server
+```
+
 ## Setting up remote desktop
 
 ### Adroid device preparation
