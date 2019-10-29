@@ -2,6 +2,7 @@ build/
 devel/
 logs/
 lib/
+pointcloud_to_laserscan/
 .vscode/
 .catkin_tools/
 .catkin_workspace

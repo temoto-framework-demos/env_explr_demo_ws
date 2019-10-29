@@ -1,0 +1,38 @@
+<launch>
+
+  <node pkg="tf" type="static_transform_publisher" name="map_height_compensate" args="0 0 -0.5 0 0 0 /map /ground_map 100" />
+
+  <node pkg="rviz" type="rviz" name="rviz" args="-d $(find operator_temoto_ws)/config/config.rviz" />
+
+  <!-- launch the camera -->
+  <include file="$(find realsense2_camera)/launch/rs_camera.launch">
+    <arg name="align_depth" value="true" />
+    <arg name="unite_imu_method" value="linear_interpolation" />
+    <arg name="filters" value="pointcloud" />
+  </include>
+
+  <!-- imu filter -->
+  <node pkg="imu_filter_madgwick" type="imu_filter_node" name="imu_filter_node" args="_use_mag:=false _publish_tf:=false _world_frame:=enu" output="screen">
+    <remap from="/imu/data_raw" to="/camera/imu" /> 
+    <remap from="/imu/data" to="/rtabmap/imu" />
+  </node>
+
+  <!-- launch rtabmap -->
+  <include file="$(find rtabmap_ros)/launch/rtabmap.launch">
+    <arg name="depth_topic" value="/camera/aligned_depth_to_color/image_raw"/>
+    <arg name="rgb_topic" value="/camera/color/image_raw"/>
+    <arg name="camera_info_topic" value="/camera/color/camera_info"/>
+    <arg name="imu_topic" value="/rtabmap/imu"/>
+    <arg name="approx_sync" value="true"/>
+    <arg name="wait_imu_to_init" value="true"/>
+    <arg name="args" value="--delete_db_on_start --Optimizer/GravitySigma 0.3 --Odom/Strategy 1 --Vis/CorType 1 --OdomF2M/MaxSize 1000 --Vis/MaxFeatures 600"/>
+  </include>
+
+  <!-- launch pointcloud to laserscan converter -->
+  <node pkg="pointcloud_to_laserscan" type="pointcloud_to_laserscan_node" name="pointcloud_to_laserscan" output="screen">
+    <remap from="cloud_in" to="/camera/depth/color/points"/>
+		<remap from="scan" to="pointcloud_to_laserscan/scan"/>
+		<rosparam command="load" file="$(find operator_temoto_ws)/config/pointcloud_to_laserscan.yaml"/>
+  </node>
+  
+</launch>
